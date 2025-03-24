@@ -1,0 +1,318 @@
+/* Main Layout */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    height: 100vh; /* Use exact height instead of min-height */
+    overflow: hidden; /* Prevent scrolling on the wrapper */
+}
+
+/* Dashboard Cards */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: var(--bs-body-bg);
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.border-left-primary {
+    border-left: 0.25rem solid var(--bs-primary) !important;
+}
+
+.border-left-success {
+    border-left: 0.25rem solid var(--bs-success) !important;
+}
+
+.border-left-info {
+    border-left: 0.25rem solid var(--bs-info) !important;
+}
+
+.border-left-warning {
+    border-left: 0.25rem solid var(--bs-warning) !important;
+}
+
+.text-xs {
+    font-size: 0.7rem;
+}
+
+.text-gray-300 {
+    color: #dddfeb !important;
+}
+
+/* Sidebar */
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #1e2a38; /* Dark blue, almost black */
+    color: #fff;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Use exact height instead of min-height */
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#sidebar.active {
+    min-width: 60px;
+    max-width: 60px;
+}
+
+/* Hover effect for collapsed sidebar */
+#sidebar.active:hover {
+    min-width: 250px;
+    max-width: 250px;
+}
+
+#sidebar.active .sidebar-brand-icon {
+    display: block;
+}
+
+#sidebar.active:hover .sidebar-brand-icon {
+    display: none;
+}
+
+#sidebar.active ul li a span {
+    display: none;
+}
+
+#sidebar.active:hover ul li a span {
+    display: inline;
+}
+
+#sidebar.active .sidebar-header h3 {
+    display: none;
+}
+
+#sidebar.active:hover .sidebar-header h3 {
+    display: block;
+}
+
+#sidebar .sidebar-header {
+    height: 39px; /* Reduced by 30% from 56px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2); /* Slightly darker for header */
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#sidebar .sidebar-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+#sidebar .sidebar-brand-icon {
+    display: none;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    flex-grow: 1;
+    overflow-y: auto; /* Make the navigation scrollable if it's too long */
+}
+
+#sidebar ul li a {
+    padding: 10px 20px;
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#sidebar.active ul li a {
+    padding: 10px;
+    text-align: center;
+}
+
+#sidebar.active:hover ul li a {
+    padding: 10px 20px;
+    text-align: left;
+}
+
+#sidebar.active ul li a i {
+    margin-right: 0;
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+#sidebar.active:hover ul li a i {
+    margin-right: 10px;
+    font-size: 1rem;
+    width: 20px;
+}
+
+#sidebar ul li a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+#sidebar .sidebar-footer {
+    padding: 0;
+    background: rgba(0, 0, 0, 0.2); /* Match the header background */
+    height: 39px; /* Reduced by 30% from 56px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prevent the footer from shrinking */
+}
+
+#sidebar .sidebar-footer small {
+    font-size: 0.85rem;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+#sidebar.active .sidebar-footer small {
+    display: none;
+}
+
+#sidebar.active:hover .sidebar-footer small {
+    display: block;
+}
+
+/* Content */
+#content {
+    width: 100%;
+    height: 100vh; /* Use exact height instead of min-height */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent scrolling on the content container */
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto; /* Make the main content scrollable */
+}
+
+/* Header */
+header .navbar {
+    height: 39px; /* Reduced by 30% from 56px */
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+.footer {
+    height: 39px; /* Reduced by 30% from 56px */
+    padding: 0 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Prevent the footer from shrinking */
+}
+
+/* Dark Mode Styles */
+[data-bs-theme="dark"] {
+    --bs-body-bg: #212529;
+    --bs-body-color: #f8f9fa;
+    --bs-nav-bg: #121212; /* Much darker, almost black */
+}
+
+[data-bs-theme="dark"] #sidebar {
+    background: var(--bs-nav-bg); /* Use the darker navigation background */
+}
+
+[data-bs-theme="dark"] .navbar {
+    background-color: var(--bs-nav-bg) !important; /* Force override any Bootstrap styles */
+}
+
+[data-bs-theme="dark"] .footer {
+    background-color: var(--bs-nav-bg);
+}
+
+[data-bs-theme="dark"] #sidebar .sidebar-header,
+[data-bs-theme="dark"] #sidebar .sidebar-footer {
+    background: var(--bs-nav-bg); /* Use the same color, no overlay */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #sidebar {
+        min-width: 0;
+        max-width: 0;
+        overflow: hidden;
+    }
+    #sidebar.active {
+        min-width: 60px;
+        max-width: 60px;
+        overflow: visible;
+    }
+    #sidebar.active:hover {
+        min-width: 250px;
+        max-width: 250px;
+    }
+    #sidebar .sidebar-header h3 {
+        display: none;
+    }
+    #sidebar.active:hover .sidebar-header h3 {
+        display: block;
+    }
+    #sidebar .sidebar-brand-icon {
+        display: block;
+    }
+    #sidebar.active:hover .sidebar-brand-icon {
+        display: none;
+    }
+    #sidebar ul li a span {
+        display: none;
+    }
+    #sidebar.active:hover ul li a span {
+        display: inline;
+    }
+    #sidebar.active ul li a {
+        padding: 10px;
+        text-align: center;
+    }
+    #sidebar.active:hover ul li a {
+        padding: 10px 20px;
+        text-align: left;
+    }
+    #sidebar.active ul li a i {
+        margin-right: 0;
+        font-size: 1.2rem;
+        width: 100%;
+    }
+    #sidebar.active:hover ul li a i {
+        margin-right: 10px;
+        font-size: 1rem;
+        width: 20px;
+    }
+}
