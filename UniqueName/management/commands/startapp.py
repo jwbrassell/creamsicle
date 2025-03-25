@@ -1,6 +1,10 @@
 import os
 from django.core.management.templates import TemplateCommand
-from UniqueName.settings import BASE_DIR
+from UniqueName.config import config
+from pathlib import Path
+
+# Get BASE_DIR from config
+BASE_DIR = Path(config.project_root)
 
 class Command(TemplateCommand):
     help = (
@@ -27,7 +31,7 @@ class Command(TemplateCommand):
         
         options = {'verbosity': 1, 'settings': None, 'pythonpath': None, 'traceback': False, 'no_color': False,
                   'force_color': False, 'name': new_app_name, 'directory': new_folder,
-                  'template': 'UniqueName/creation_templates/app_template', 'extensions': ['.py'], 'files': []}
+                  'template': f'{config.app_name}/creation_templates/app_template', 'extensions': ['.py'], 'files': []}
         app_name = options.pop("name")
         target = options.pop("directory")
         try:

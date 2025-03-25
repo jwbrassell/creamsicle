@@ -1,5 +1,5 @@
 """
-URL configuration for UniqueName project.
+URL configuration for Django project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -19,7 +19,23 @@ from django.urls import path
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.conf import settings
+from django.template.loader import render_to_string
 from version import VERSION
+
+# Custom render function that works with both Jinja2 and Django templates
+def render_template(request, template_name, context=None, content_type=None, status=None, using=None):
+    """
+    Render a template with the given context, automatically selecting the appropriate template engine.
+    This function is a drop-in replacement for Django's render function.
+    """
+    if context is None:
+        context = {}
+    
+    # Render the template to a string
+    content = render_to_string(template_name, context, request, using)
+    
+    # Create and return an HttpResponse
+    return HttpResponse(content, content_type=content_type, status=status)
 
 # Navigation items for the sidebar
 navigation_items = [
@@ -57,7 +73,7 @@ def home(request):
 # Dashboard view
 def dashboard(request):
     context = get_base_context()
-    return render(request, 'dashboard.html', context)
+    return render_template(request, 'dashboard.html', context)
 
 # User preferences view
 def user_preferences(request):
@@ -67,7 +83,7 @@ def user_preferences(request):
         'error_title': 'Not Implemented',
         'error_message': 'User preferences page is not implemented yet.',
     })
-    return render(request, 'error.html', context)
+    return render_template(request, 'error.html', context)
 
 # Admin panel view
 def admin_panel(request):
@@ -77,7 +93,7 @@ def admin_panel(request):
         'error_title': 'Not Implemented',
         'error_message': 'Admin panel is not implemented yet.',
     })
-    return render(request, 'error.html', context)
+    return render_template(request, 'error.html', context)
 
 # My activity view
 def my_activity(request):
@@ -87,7 +103,7 @@ def my_activity(request):
         'error_title': 'Not Implemented',
         'error_message': 'My activity page is not implemented yet.',
     })
-    return render(request, 'error.html', context)
+    return render_template(request, 'error.html', context)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

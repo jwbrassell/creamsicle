@@ -3,17 +3,18 @@
 import os
 import sys
 
-# Import the app name from app_config.py
-try:
-    from app_config import APP_NAME
-except ImportError:
-    # If app_config.py doesn't exist, default to UniqueName
-    APP_NAME = "UniqueName"
+# Add the project root directory to the Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# Import the config singleton
+from UniqueName.config import config
+
+# Set default settings module
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', config.get_settings_module())
 
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'{APP_NAME}.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

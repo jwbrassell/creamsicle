@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en" class="h-100" data-bs-theme="light">
 <head>
@@ -10,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Core CSS -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{{ static('css/style.css') }}" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -36,7 +35,7 @@
             <ul class="list-unstyled components">
                 {% for nav_item in navigation_items %}
                     <li>
-                        <a href="{% if nav_item.namespace %}{% url nav_item.namespace|add:':'|add:nav_item.url_name %}{% else %}{% url nav_item.url_name %}{% endif %}">
+                        <a href="{{ url(nav_item.url_name) if not nav_item.namespace else url(nav_item.namespace + ':' + nav_item.url_name) }}">
                             <i class="{{ nav_item.icon }}"></i>
                             <span>{{ nav_item.name }}</span>
                         </a>
@@ -86,7 +85,7 @@
     {% block extra_libs %}{% endblock %}
     
     <!-- Custom JS -->
-    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{{ static('js/main.js') }}"></script>
     
     <!-- Page Specific JS -->
     {% block extra_js %}{% endblock %}
